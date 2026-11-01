@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: secondsignal-backend
+    runtime: python
+    plan: free
+    branch: fix/backend-validation
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: FRONTEND_ORIGIN_REGEX
+        value: https:\/\/.*\.vercel\.app
+      - key: FRONTEND_ORIGIN
+        sync: false
+      - key: DATABASE_URL
+        sync: false
